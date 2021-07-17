@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/default/header.ejs')%>
+  <head>
+    <link rel="stylesheet" href="css/cart.css" />
+  </head>
+  <body class="stretched modal-subscribe-bottom">
+    <div id="wrapper" class="clearfix">
+      <%- include('../partials/default/navbar.ejs')%>
+      <div class="container">
+        <h1>Your cart</h1>
+        <section class="cart">
+          <div class="cart-items">
+            <h3>Bag</h3>
+            <div class="cart-item">
+              <img src="/images/product/7-1.jpg" alt="product-image" />
+              <div class="info-container">
+                <p>Name</p>
+                <div class="collection">Product collection</div>
+                <div class="size">
+                  <label for="size">Size</label>
+                  <select name="size" id="">
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                  </select>
+                </div>
+                <div class="qty">
+                  <label for="quantity">Quantity:</label>
+                  <select name="quantity" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+                <button>Remove</button>
+              </div>
+            </div>
+            <div class="cart-item">
+              <img src="/images/product/7-1.jpg" alt="product-image" />
+              <div class="info-container">
+                <p>Name</p>
+                <div class="collection">Product collection</div>
+                <div class="size">
+                  <label for="size">Size</label>
+                  <select name="size" id="">
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                  </select>
+                </div>
+                <div class="qty">
+                  <label for="quantity">Quantity:</label>
+                  <select name="quantity" id="">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+                <button>Remove</button>
+              </div>
+            </div>
+          </div>
+          <div class="summary">
+            <h3>Summary</h3>
+            <div class="mt-1">
+              <div class="sub-total d-flex justify-content-between">
+                <div>Subtotal</div>
+                <div>260$</div>
+              </div>
+              <div class="shipping d-flex justify-content-between">
+                <div>Shipping Fee:</div>
+                <div>0$</div>
+              </div>
+              <div class="tax d-flex justify-content-between">
+                <div>Estimate Tax:</div>
+                <div>0$</div>
+              </div>
+              <hr />
+              <div class="total d-flex justify-content-between">
+                <div>Total:</div>
+                <div>260$</div>
+              </div>
+            </div>
+            <button>Check out</button>
+          </div>
+        </section>
+      </div>
+      <!-- #content end -->
+      <%- include('../partials/default/footer.ejs')%>
+    </div>
+    <!-- Go To Top
+============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+    <!-- JavaScripts
+	============================================= -->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.min.js"></script>
+
+    <!-- Footer Scripts
+	============================================= -->
+    <script src="js/functions.js"></script>
+
+    <script>
+      $(document).ready(changeHeaderColor);
+      $(window).on("resize", changeHeaderColor);
+
+      function changeHeaderColor() {
+        if (jQuery(window).width() > 991.98) {
+          jQuery("#header").hover(
+            function () {
+              if (!$(this).hasClass("sticky-header")) {
+                $(this).addClass("hover-light").removeClass("dark");
+                SEMICOLON.header.logo();
+              }
+              $("#wrapper").addClass("header-overlay");
+            },
+            function () {
+              if (!$(this).hasClass("sticky-header")) {
+                $(this).removeClass("hover-light").addClass("dark");
+                SEMICOLON.header.logo();
+              }
+              $("#wrapper").removeClass("header-overlay");
+            }
+          );
+        }
+      }
+
+      jQuery("#modal-subscribe-form").on("formSubmitSuccess", function () {
+        $("#modal-subscribe").addClass("fadeOutDown");
+        setTimeout(function () {
+          $("#modal-subscribe").modal("hide");
+        }, 400);
+        $("#modal-subscribe").attr("displayed", "false");
+      });
+    </script>
+  </body>
+</html>

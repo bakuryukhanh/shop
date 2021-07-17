@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../../partials/default/header')%>
+  <body class="stretched">
+    <div id="wrapper" class="clearfix">
+      <%- include("../../partials/default/navbar")%>
+
+      <div class="container" style="padding-top: 70px; margin-bottom: 50px">
+        <div class="breadcrumbs">Product > Product Name</div>
+        <div class="row">
+          <div class="col-md-8 d-flex justify-content-center">
+            <div class="product-slider">
+              <div class="product">
+                <div class="product-image position-relative">
+                  <div
+                    class="fslider"
+                    data-arrows="false"
+                    data-pagi="false"
+                    data-speed="400"
+                    data-pause="6000"
+                    data-thumbs="true"
+                  >
+                    <div class="flexslider">
+                      <div class="slider-wrap">
+                        <div class="slide" data-thumb="/images/product/7-1.jpg">
+                          <a href="#"
+                            ><img
+                              src="/images/product/7-1.jpg"
+                              alt="Morning Dew"
+                          /></a>
+                        </div>
+                        <div class="slide" data-thumb="/images/product/7-2.jpg">
+                          <a href="#"
+                            ><img
+                              src="/images/product/7-2.jpg"
+                              alt="Morning Dew"
+                          /></a>
+                        </div>
+                        <div class="slide" data-thumb="/images/product/7-3.jpg">
+                          <a href="#"
+                            ><img
+                              src="/images/product/7-3.jpg"
+                              alt="Morning Dew"
+                          /></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="information col-md-4">
+            <h5 class="my-0">Product Collection</h5>
+            <h3 class="mt-0 mb-1">Product Name</h3>
+            <p class="my-0">100.00$</p>
+            <hr class="my-2" />
+            <p class="mt-0 mb-2" style="font-weight: bold">Select size:</p>
+            <div class="d-flex">
+              <div class="mx-2">
+                <input type="radio" name="size" id="S" value="S" />
+                <label for="S" class="label">S</label>
+              </div>
+              <div class="mx-2">
+                <input type="radio" name="size" id="M" value="M" />
+                <label for="M" class="label">M</label>
+              </div>
+              <div class="mx-2">
+                <input type="radio" name="size" id="L" value="L" />
+                <label for="L" class="label">L</label>
+              </div>
+              <div class="mx-2">
+                <input type="radio" name="size" id="XL" value="XL" />
+                <label for="XL" class="label">XL</label>
+              </div>
+            </div>
+            <p class="mt-0 mb-2 font-weight-bold">Decription:</p>
+            <p class="my-0">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+              autem exercitationem ipsum laboriosam deserunt. Culpa rem
+              repellendus est facere dolorum.
+            </p>
+            <div class="text-center">
+              <button class="add2cartBtn my-4">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%- include("../../partials/default/footer")%>
+    </div>
+    <!-- Go To Top
+============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+    <!-- JavaScripts
+	============================================= -->
+    <script src="js/jquery.js"></script>
+    <script src="js/plugins.min.js"></script>
+
+    <!-- Footer Scripts
+	============================================= -->
+    <script src="js/functions.js"></script>
+
+    <script>
+      $(document).ready(changeHeaderColor);
+      $(window).on("resize", changeHeaderColor);
+
+      function changeHeaderColor() {
+        if (jQuery(window).width() > 991.98) {
+          jQuery("#header").hover(
+            function () {
+              if (!$(this).hasClass("sticky-header")) {
+                $(this).addClass("hover-light").removeClass("dark");
+                SEMICOLON.header.logo();
+              }
+              $("#wrapper").addClass("header-overlay");
+            },
+            function () {
+              if (!$(this).hasClass("sticky-header")) {
+                $(this).removeClass("hover-light").addClass("dark");
+                SEMICOLON.header.logo();
+              }
+              $("#wrapper").removeClass("header-overlay");
+            }
+          );
+        }
+      }
+
+      jQuery("#modal-subscribe-form").on("formSubmitSuccess", function () {
+        $("#modal-subscribe").addClass("fadeOutDown");
+        setTimeout(function () {
+          $("#modal-subscribe").modal("hide");
+        }, 400);
+        $("#modal-subscribe").attr("displayed", "false");
+      });
+    </script>
+  </body>
+</html>
