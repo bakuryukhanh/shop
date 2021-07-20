@@ -1,5 +1,4 @@
-// const { globalVariables } = require('./config/configuration');
-// const { selectOption } = require('./config/customFunction');
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -8,28 +7,38 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
 const bodyParser = require("body-parser");
-const dotenv = require("dotenv");
-// const fileUpload = require('express-fileupload');
-const passport = require("passport");
-// const multer = require('multer');
 const app = express();
+const passport = require("./middlewares/passport");
+/*-------------------Routes------------------------*/
+const defaultRoutes = require("./routes/defaultRoute");
+const adminRoutes = require("./routes/adminRoute");
+const apiRoutes = require("./api");
 
 /*---Configure expresss----*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    resave: true,
+    saveUninitialized: true,
+    secret: "somesecret",
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  })
+);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser());
 
 /* Configure Mongoose to COnnect to MongoDB */
-dotenv.config();
-console.log(process.env.DB_URL);
 mongoose
   .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
   })
   .then((response) => {
     console.log("MongoDB connected successfully");
@@ -55,32 +64,33 @@ app.use(
 
 app.use(flash());
 
-// app.use(fileUpload());
-
 app.use(passport.initialize());
 app.use(passport.session());
-/*-------------------Routes------------------------*/
-const defaultRoutes = require("./routes/defaultRoute");
-const adminRoutes = require("./routes/adminRoute");
 
-app.get("*", (req, res, next) => {
-  res.locals.user = req.user || null;
-  next();
+app.post("/login", function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.redirect("/login");
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      if (user.isAdmin) {
+        return res.redirect("/admin");
+      }
+      return res.redirect("/");
+    });
+  })(req, res, next);
 });
-// app.get('/admin', (req, res, next) => {
-//     res.locals.admin = req.admin || null;
-//     console.log(res.locals.admin);
-//     next();
-// })
-
-/*------------INIT UPLOAD--------------*/
-// app.post('/upload', (req, res) => {
-//     res.send('hello');
-// })
 
 app.use("/", defaultRoutes);
 app.use("/admin", adminRoutes);
-const PORT = 3000;
+app.use("/api", apiRoutes);
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

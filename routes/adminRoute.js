@@ -1,21 +1,41 @@
 const express = require("express");
 const Router = express.Router();
+const categoryController = require("../controllers/admin/category");
+const productController = require("../controllers/admin/product");
+// dashboard Page
 Router.route("/").get((req, res) => {
   res.render("admin", { page: "dashboard" });
 });
-Router.route("/collection").get((req, res) => {
-  res.render("admin/collection", { page: "collection" });
+
+//category Page
+
+Router.route("/category").get(categoryController.getIndex);
+
+Router.route("/category/create").get(async (req, res) => {
+  res.render("admin/category/create", { page: "category" });
 });
-Router.route("/product").get((req, res) => {
-  res.render("admin/product", { page: "product" });
-});
+
+Router.route("/category/edit/:id").get(categoryController.getEdit);
+
+// Product Page
+
+Router.route("/product").get(productController.getIndex);
+
+Router.route("/product/create").get(productController.getCreate);
+
+// customer Page
 Router.route("/customer").get((req, res) => {
   res.render("admin/customer", { page: "customer" });
 });
+
+//order Page
 Router.route("/order").get((req, res) => {
   res.render("admin/order", { page: "order" });
 });
+
+//report Page
 Router.route("/report").get((req, res) => {
   res.render("admin/report", { page: "report" });
 });
+
 module.exports = Router;
