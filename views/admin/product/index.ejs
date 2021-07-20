@@ -26,6 +26,7 @@
             <th>Name</th>
             <th>Category</th>
             <th>Price</th>
+            <th>Preview image</th>
             <th>More</th>
           </tr>
           <% products.forEach((element,idx) => { %>
@@ -34,6 +35,7 @@
             <td class="bold"><%- element.name %></td>
             <td><%- element.category.name %></td>
             <td><%- element.price %></td>
+            <td><img src="<%- element.images[0] %>" alt="preview image" /></td>
             <td>
               <a href="/admin/product/<%- element._id%> " class="detail"
                 >Detail</a

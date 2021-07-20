@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <%- include('../../partials/default/header')%>
@@ -6,7 +7,9 @@
       <%- include("../../partials/default/navbar")%>
       <div class="container" style="margin-top: 70px">
         <div class="d-flex justify-content-between align-items-center">
-          <div class="breadcrumbs">Home > Product</div>
+          <div class="breadcrumbs">Home > Product > <%- breadcrumb %> </div>
+          <% if(searchCounts){ %>
+            <div class="search-count"><%- searchCounts %>  Results for <strong><%- search %></strong> </div> <% } %> 
           <div class="d-flex align-items-center">
             <div class="toggle-filter" id="toggle-filter-btn">
               <p style="margin: 0; padding: 0; margin-right: 10px">
@@ -17,10 +20,19 @@
             <div class="sort">
               <label for="sort-filter">Sort by:</label>
               <select name="sort-filter" id="sort-filter">
+                <% function checkSort(sort,value){ if(sort==value) return "selected"} %>
+                
+
                 <option value="0"></option>
-                <option value="1">Features</option>
-                <option value="2">Price:Low-High</option>
-                <option value="3">Price:High-Low</option>
+                <option value="1" 
+                  <%- checkSort(sort,"1") %> >Features
+                </option>
+                <option value="2" 
+                  <%- checkSort(sort,"2") %> >Price:Low-High
+                </option>
+                <option value="3" 
+                  <%- checkSort(sort,"3") %> >Price:High-Low
+                </option>
               </select>
             </div>
           </div>
@@ -40,31 +52,64 @@
                   >
                 </li>
                 <li><hr /></li>
-                <li><a href="#">Jeans</a></li>
-                <li><a href="#">T-Shirts</a></li>
-                <li><a href="#">Tops</a></li>
-                <li><a href="#">Dresses</a></li>
-                <li><a href="#">Skirts</a></li>
-                <li><a href="#">Sportswear</a></li>
-                <li><a href="#">Shorts</a></li>
-                <li><a href="#">Trousers</a></li>
-                <li><a href="#">Sweat-shirts</a></li>
-                <li><a href="#">Sweaters</a></li>
-                <li><a href="#">Flats</a></li>
-                <li><a href="#">Sandals</a></li>
-                <li><a href="#">Loafers & Oxfords</a></li>
-                <li><a href="#">Heels</a></li>
+                <% categories.forEach(category => { %>
+                 <li><a href="/product?category=<%- category._id %>"><%- category.name %> </a></li>
+                <% }) %>
               </ul>
             </div>
             <div class="col-md-10 expand" id="product-container">
               <div class="row">
-                <%- include("../../partials/default/productCard")%>
-                <%-include("../../partials/default/productCard")%>
-                <%-include("../../partials/default/productCard")%>
-                <%-include("../../partials/default/productCard")%>
-                <%-include("../../partials/default/productCard")%>
-                <%-include("../../partials/default/productCard")%>
-                <%-include("../../partials/default/productCard")%>
+                <% products.forEach(element => { %>
+                <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="product">
+                    <div class="product-image position-relative">
+                      <div
+                        class="fslider"
+                        data-pagi="false"
+                        data-speed="400"
+                        data-pause="200000"
+                      >
+                        <div class="flexslider">
+                          <div class="slider-wrap">
+                            <% element.images.forEach(image => { %>
+                            <div class="slide">
+                              <a href="/product/<%- element._id%>"
+                                ><img
+                                  src="<%- image %>"
+                                  alt="<%- element.name %> "
+                              /></a>
+                            </div>
+                            <% }) %>
+                          </div>
+                        </div>
+                      </div>
+                      <a
+                        href="product/<%- element._id %>"
+                        class="cart-btn button button-white button-light"
+                        ><i class="icon-line-plus"></i>Buy Now</a
+                      >
+                    </div>
+                    <div class="product-desc">
+                      <div class="product-title">
+                        <h3>
+                          <a href="product/<%- element._id %>"
+                            ><%- element.name %></a
+                          >
+                        </h3>
+                        <span
+                          ><a href="category/<%- element.category._id %>"
+                            ><%- element.category.name %>
+                          </a></span
+                        >
+                      </div>
+                      <div class="product-price">
+                        <ins>$<%- element.price %> </ins>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <% }) %>
               </div>
             </div>
           </div>
@@ -84,7 +129,12 @@
     <!-- Footer Scripts
 	============================================= -->
     <script src="js/functions.js"></script>
-
+    <script>
+      const sortSelect= document.getElementById("sort-filter")
+      sortSelect.addEventListener("change",(event)=>{
+        window.location.search = `?sort=${event.target.value}`
+      })
+    </script>
     <script>
       $(document).ready(changeHeaderColor);
       $(window).on("resize", changeHeaderColor);
@@ -137,5 +187,6 @@
       };
       filterBtn.addEventListener("click", toggleFilter);
     </script>
+    <%- include("../../partials/default/cartScript") %>
   </body>
 </html>

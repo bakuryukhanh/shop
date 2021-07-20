@@ -13,14 +13,18 @@
         </div>
       </div>
       <div class="wrapper">
-        <form action="/api/product" method="post" id="create-category">
+        <form action="/api/product" method="post" id="create-product">
           <div class="form-group">
             <label for="name">name:</label>
             <input type="text" name="name" id="name" />
           </div>
           <div class="form-group">
             <label for="category:">category:</label>
-            <input type="select" name="category" id="category" />
+            <select type="select" name="category" id="category">
+              <% categories.forEach(element => { %>
+              <option value="<%- element._id %>"><%- element.name %></option>
+              <% }) %>
+            </select>
           </div>
           <div class="form-group">
             <label for="price">price:</label>
@@ -63,7 +67,7 @@
       }
     </script>
     <script>
-      const form = document.getElementById("create-category");
+      const form = document.getElementById("create-product");
       const previewCategory = document.getElementById("preview-category");
       const previewBtn = document.getElementById("category-show-img");
       const imgInput = document.getElementById("images");
@@ -94,11 +98,8 @@
       async function SubmitForm(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const name = formData.get("name");
-        const description = formData.get("description");
-        const thumbnailImg = formData.get("thumbnailImg");
         showModal("loading");
-        let response = await fetch("/api/categories", {
+        let response = await fetch("/api/products", {
           method: "POST",
           header: {
             "Content-Type": "multipart/form-data",
@@ -110,7 +111,7 @@
         console.log("end delay");
         hideModal("loading");
         response = await response.json();
-
+        window.location.pathname = "admin/product";
         console.log(response);
       }
 

@@ -493,8 +493,13 @@ input[type="file"] {
 }
 .product-table-row {
   display: grid;
-  grid-template-columns: 20px auto 200px 150px 200px;
+  grid-template-columns: 20px auto 200px 150px 200px 200px;
   text-align: center;
   padding: 10px 5px;
   border: 1px solid var(--border-color);
+}
+.product-table-row img {
+  width: 120px;
+  height: 150px;
+  object-fit: contain;
 }

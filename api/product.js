@@ -13,15 +13,10 @@ Router.route("/")
     const fieldObject = {};
     const fileArray = [];
     form.on("field", (field, value) => {
-      console.log(field, value);
       fieldObject[field] = value;
     });
     form.on("file", (field, file) => {
-      console.log(file.name);
       fileArray.push(file);
-    });
-    form.on("end", () => {
-      console.log("end");
     });
     await form.parse(req, async (err, fields, files) => {
       if (err) return res.json(err);
@@ -42,6 +37,11 @@ Router.route("/")
           fieldObject.description
         )
       );
+      if (error) {
+        console.log(error);
+        res.status(400);
+        return res.end("done");
+      }
       return res.json({ ...fieldObject, imgSrcs });
     });
   });

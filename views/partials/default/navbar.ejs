@@ -1,3 +1,7 @@
+<% function checkPage(current, page){ 
+  if(current== page){ return "current"}
+} %> 
+
 <header
   id="header"
   class="transparent-header floating-header header-size-custom sticky-header"
@@ -28,18 +32,26 @@
         <div class="header-misc">
           <!-- Top Login
 							============================================= -->
+          <form action="/product" method="get" class="search-form">
           <div class="searchbar">
             <input
               class="search_input"
               type="text"
-              name=""
+              name="search"
               placeholder="Search..."
               id="seach-box"
             />
-            <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+            <button type="submit" class="search_icon"><i class="fas fa-search"></i></button>
           </div>
+          </form>
           <div id="top-account" class="px-4">
+            <% if(user) { %>
+            <a href="/user"
+              ><img src="<%- user.avatar %>" alt="user avatar" /><% user.name %>
+            </a>
+            <% }else{ %>
             <a href="/login">Sign up/Login</a>
+            <% } %>
           </div>
           <!-- #top-search end -->
 
@@ -98,9 +110,9 @@
                 <span class="top-checkout-price font-weight-semibold text-dark"
                   >$59.98</span
                 >
-                <button class="button button-dark button-small m-0">
+                <a href="/cart" class="button button-dark button-small m-0">
                   View Cart
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -124,209 +136,11 @@
         <nav class="primary-menu with-arrows">
           <!-- Menu Left -->
           <ul class="not-dark menu-container">
-            <li class="menu-item current">
-              <a class="menu-link" href="#"><div>Home</div></a>
+            <li class="menu-item <%- checkPage(page,"home") %>">
+              <a class="menu-link" href="/"><div>Home</div></a>
             </li>
-            <li class="menu-item mega-menu">
-              <a class="menu-link" href="/product"><div>Shop</div></a>
-              <div class="mega-menu-content mega-menu-style-2">
-                <div class="container">
-                  <div class="row">
-                    <ul
-                      class="
-                        mega-menu-column
-                        sub-menu-container
-                        border-left-0
-                        col-lg-3
-                      "
-                    >
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Footwear</div></a>
-                        <ul class="sub-menu-container">
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Casual Shoes</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Formal Shoes</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sports shoes</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Flip Flops</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Slippers</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"><div>Sandals</div></a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Clothing</div></a>
-                        <ul class="sub-menu-container">
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Casual Shirts</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>T-Shirts</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Collared Tees</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Pants / Trousers</div></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <ul
-                      class="
-                        mega-menu-column
-                        sub-menu-container
-                        border-left-0
-                        col-lg-3
-                      "
-                    >
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Sportswear</div></a>
-                        <ul class="sub-menu-container">
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sports Casual Shirts</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sports T-Shirts</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sports Collared Tees</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sports Shoes</div></a
-                            >
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"><div>Jackets</div></a>
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Swimwears</div></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Innerwears</div></a>
-                        <ul class="sub-menu-container">
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"><div>Boxers</div></a>
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"><div>Vests</div></a>
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sleepwears</div></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <ul
-                      class="
-                        mega-menu-column
-                        sub-menu-container
-                        border-left-0
-                        col-lg-3
-                      "
-                    >
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Innerwears</div></a>
-                        <ul class="sub-menu-container">
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"><div>Boxers</div></a>
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"><div>Vests</div></a>
-                          </li>
-                          <li class="menu-item">
-                            <a class="menu-link" href="#"
-                              ><div>Sleepwears</div></a
-                            >
-                          </li>
-                        </ul>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Sunglasses</div></a>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Watches</div></a>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Bags</div></a>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Headphones</div></a>
-                      </li>
-                      <li class="mega-menu-title menu-item">
-                        <a class="menu-link" href="#"><div>Accessories</div></a>
-                      </li>
-                    </ul>
-                    <ul
-                      class="
-                        mega-menu-column
-                        sub-menu-container
-                        col-lg-3
-                        border-left-0
-                      "
-                    >
-                      <li class="card p-0 bg-transparent border-0">
-                        <img
-                          class="card-img-top"
-                          src="/images/others/menu.jpg"
-                          alt="image cap"
-                        />
-                        <a
-                          href="#"
-                          class="
-                            btn btn-link
-                            text-left
-                            font-weight-medium
-                            pl-0
-                            bg-transparent
-                          "
-                          ><u>Editor's Pick</u></a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+            <li  class="menu-item <%- checkPage(page,"product") %>">
+              <a class="menu-link" href="/product" ><div>Shop</div></a>
             </li>
             <!-- .mega-menu end -->
             <li class="menu-item mega-menu">
