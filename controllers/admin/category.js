@@ -6,9 +6,10 @@ const getIndex = async (req, res, next) => {
     console.log(error);
     return res.send("error occur");
   }
-  const Fcategories = categories.map((category) => {
+  var Fcategories = categories.map((category) => {
     return { ...category, productsCount: category.products.length };
   });
+  Fcategories = Fcategories.filter((category) => !category.isDeleted);
   return res.render("admin/category", {
     page: "category",
     categories: Fcategories,
@@ -25,4 +26,13 @@ const getEdit = async (req, res, next) => {
     category: category,
   });
 };
-module.exports = { getIndex, getEdit };
+const getRemove = async (req, res, next) => {
+  const cateid = req.params.id;
+  const [error] = await to(SCategory.deleteCategories(cateid));
+  if (error) {
+    console.log(error);
+    return res.send("error occur");
+  }
+  return res.redirect("/admin/category");
+};
+module.exports = { getIndex, getEdit, getRemove };

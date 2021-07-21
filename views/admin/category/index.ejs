@@ -33,11 +33,11 @@
             <td class="bold"><%- element.name %></td>
             <td><%- element.productsCount %></td>
             <td>
-              <a href="/admin/category/<%- element._id%> " class="detail"
-                >Detail</a
-              >
               <a href="/admin/category/edit/<%- element._id %> " class="edit"
                 >Edit</a
+              >
+              <a href="/admin/category/remove/<%- element._id %>" class="remove"
+                >Remove</a
               >
             </td>
           </tr>

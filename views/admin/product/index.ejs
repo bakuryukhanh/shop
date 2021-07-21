@@ -37,11 +37,11 @@
             <td><%- element.price %></td>
             <td><img src="<%- element.images[0] %>" alt="preview image" /></td>
             <td>
-              <a href="/admin/product/<%- element._id%> " class="detail"
-                >Detail</a
-              >
-              <a href="/admin/product/edit/<%- element._id %> " class="edit"
+              <a href="/admin/product/update/<%- element._id %> " class="edit"
                 >Edit</a
+              >
+              <a href="/admin/product/remove/<%- element._id %>" class="remove"
+                >Remove</a
               >
             </td>
           </tr>

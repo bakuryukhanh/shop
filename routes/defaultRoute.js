@@ -4,6 +4,7 @@ const User = require("../models/User");
 const { to } = require("await-to-js");
 const productController = require("../controllers/default/product");
 const homeController = require("../controllers/default");
+const userController = require("../controllers/default/user");
 Router.route("/").get(homeController.getIndex);
 Router.route("/login").get((req, res, next) => {
   res.render("default/Login");
@@ -23,8 +24,6 @@ Router.route("/product/:id").get(productController.getSingle);
 Router.route("/test").get((req, res) => {
   res.render("default/Product/Single");
 });
-Router.route("/user").get((req, res) => {
-  res.render("default/UserInfo");
-});
+Router.route("/user").get(userController.getIndex);
 Router.route("/cart").get(productController.getCart);
 module.exports = Router;

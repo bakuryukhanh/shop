@@ -22,7 +22,7 @@ const getProduct = async (PId) => {
 };
 const updateProduct = async (productId, data) => {
   const id = ObjectId(productId);
-  const [error] = await to(ProductModel.findByIdAndUpdate(id));
+  const [error] = await to(ProductModel.findByIdAndUpdate(id, data));
   if (error) console.log(error);
   return;
 };

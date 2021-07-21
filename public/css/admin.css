@@ -503,3 +503,10 @@ input[type="file"] {
   height: 150px;
   object-fit: contain;
 }
+.remove {
+  background-color: var(--red);
+  color: white;
+  height: fit-content;
+  border-radius: 5px;
+  padding: 5px 10px;
+}

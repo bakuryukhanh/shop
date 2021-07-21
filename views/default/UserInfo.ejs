@@ -63,10 +63,10 @@
                 src="https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg"
                 alt="avatar"
               />
-              <h4>Customer Name</h4>
-              <p>Address: Customer address</p>
-              <p>Phone: 0123456789</p>
-              <p>Email: customer@vectorstock.com</p>
+              <h4><%- user.name %></h4>
+              <p>Address: <%- user.address %></p>
+              <p>Phone: <%- user.phoneNumber %></p>
+              <p>Email: <%-user.email %></p>
             </div>
           </div>
         </section>
@@ -93,7 +93,7 @@
                   type="text"
                   name="name"
                   id="name"
-                  value="Tran Van Khanh"
+                  value="<%- user.name %>"
                 />
               </div>
               <div class="form-group">
@@ -103,7 +103,7 @@
                   type="text"
                   name="address"
                   id="address"
-                  value="Tam Ky, Quang Nam"
+                  value="<%- user.address %>"
                 />
               </div>
               <div class="form-group">
@@ -113,7 +113,7 @@
                   disabled
                   name="phone"
                   id="phone"
-                  value="0971278014"
+                  value="<%- user.phoneNumber %>"
                 />
               </div>
               <div class="form-group">
@@ -122,7 +122,7 @@
                   type="text"
                   name="email"
                   id="email"
-                  value="tvknbk2015@gmail.com"
+                  value="<%- user.email %>"
                   disabled
                 />
               </div>

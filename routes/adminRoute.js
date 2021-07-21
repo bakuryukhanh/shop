@@ -16,12 +16,15 @@ Router.route("/category/create").get(async (req, res) => {
 });
 
 Router.route("/category/edit/:id").get(categoryController.getEdit);
+Router.route("/category/remove/:id").get(categoryController.getRemove);
 
 // Product Page
 
 Router.route("/product").get(productController.getIndex);
 
 Router.route("/product/create").get(productController.getCreate);
+Router.route("/product/remove/:id").get(productController.getRemove);
+Router.route("/product/update/:id").get(productController.getUpdate);
 
 // customer Page
 Router.route("/customer").get((req, res) => {
