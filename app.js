@@ -27,7 +27,8 @@ app.use(
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
   })
 );
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());

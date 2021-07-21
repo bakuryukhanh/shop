@@ -118,3 +118,49 @@ ul {
   box-shadow: var(--box-shadow);
   padding: 20px 30px 10px 30px;
 }
+.order-container {
+  width: calc(100%-80px);
+  padding: 20px 15px;
+  background-color: white;
+  margin: 30px 40px;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-bottom: 1px solid #272727;
+}
+.order-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  padding: 20px 10px;
+  border-bottom: 1px solid #272727;
+}
+.info .name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.info .size {
+  color: var(--gray);
+}
+.order-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.total strong {
+  font-size: 24px;
+  color: #1abc9c;
+}
+.order-footer button {
+  background-color: #1abc9c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+.order-state {
+  color: #1abc9c;
+  font-weight: bold;
+}

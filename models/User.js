@@ -8,7 +8,12 @@ const UserSchema = new mongoose.Schema({
     default:
       "https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png",
   },
-  bills: { type: Array, default: [] },
+  orders: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "order",
+    },
+  ],
   phoneNumber: { type: String, required: true },
   email: { type: String, required: true },
   address: { type: String, required: true },
