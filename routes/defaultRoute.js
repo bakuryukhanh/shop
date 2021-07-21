@@ -16,7 +16,7 @@ Router.route("/register").post(async (req, res) => {
   console.log(newUser);
 
   if (err) res.json(err);
-  return res.end("done");
+  return res.redirect("/login");
 });
 Router.route("/product").get(productController.getIndex);
 Router.route("/product/:id").get(productController.getSingle);
